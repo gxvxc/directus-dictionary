@@ -3,6 +3,12 @@
   "name": "directus-dictionary",
   "author": "George Chelebiev <george@forkforkfork.com>",
   "license": "MIT",
+  "keywords": ["directus","directus-extensions", "directus-extensions-interfaces"],
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/georgexchelebiev/directus-dictionary"
+  },
+  "homepage": "https://github.com/georgexchelebiev/directus-dictionary#readme",
   "scripts": {
     "build": "rollup -c"
   },
@@ -19,7 +25,7 @@
     "typescript": "^4.2.2"
   },
   "dependencies": {
-		"@vue/composition-api": "^1.0.0-rc.2",
+    "@vue/composition-api": "^1.0.0-rc.2",
     "vue": "^2.6.12"
   }
 }

@@ -3,7 +3,7 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import vue from "rollup-plugin-vue";
 import scss from "rollup-plugin-scss";
-import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 import replace from "rollup-plugin-replace";
 
 const plugins = [
