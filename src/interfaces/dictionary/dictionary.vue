@@ -14,12 +14,16 @@
       </div>
       <div class="form">
         <v-input
-          :value="Object.values((value || []).find(e=>Object.keys(e)[0]===entry.key) || {})[0]  || null"
+          :value="getValue(entry.key)"
           :nullable="false"
           placeholder="Enter value..."
           @input="handleInput({[entry.key]:$event})"
           :required="true"
-        />
+        >
+          <template #append>
+            <v-icon v-if="!getValue(entry.key)" name="warning" />
+          </template>
+        </v-input>
       </div>
     </div>
   </div>
@@ -27,7 +31,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import VueCompositionAPI,{ defineComponent, PropType } from "@vue/composition-api";
+import VueCompositionAPI,{ defineComponent, PropType, computed,ref } from "@vue/composition-api";
 Vue.use(VueCompositionAPI)
 
 type Record = {
@@ -51,6 +55,10 @@ export default defineComponent({
     }
   },
   setup(props,{emit}){
+    const getValue = (k:string) => {
+      const c = computed( () => Object.values((props.value || []).find(e=>Object.keys(e)[0]===k) || {})[0] || null )
+      return c.value
+    }
     const handleInput = (input:Record) => {
       if(props.value === null || props.value.length === 0) {
         return emit("input", [input])
@@ -63,7 +71,7 @@ export default defineComponent({
       emit("input", [...props.value, input])
     }
 
-    return {handleInput}
+    return {handleInput,getValue}
   }
 })
 </script>

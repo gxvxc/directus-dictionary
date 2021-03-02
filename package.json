@@ -3,8 +3,12 @@
   "name": "directus-dictionary",
   "author": "George Chelebiev <george@forkforkfork.com>",
   "license": "MIT",
-  "keywords": ["directus","directus-extensions", "directus-extensions-interfaces"],
-  "repository":{
+  "keywords": [
+    "directus",
+    "directus-extensions",
+    "directus-extensions-interfaces"
+  ],
+  "repository": {
     "type": "git",
     "url": "https://github.com/georgexchelebiev/directus-dictionary"
   },
