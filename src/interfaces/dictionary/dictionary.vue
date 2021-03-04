@@ -14,12 +14,16 @@
       </div>
       <div class="form">
         <v-input
-          :value="Object.values((value || []).find(e=>Object.keys(e)[0]===entry.key) || {})[0]  || null"
+          :value="getValue(entry.key)"
           :nullable="false"
           placeholder="Enter value..."
-          @input="handleInput({[entry.key]:$event})"
+          @input="handleInput(entry.key,$event)"
           :required="true"
-        />
+        >
+          <template #append>
+            <v-icon v-if="!getValue(entry.key)" name="warning" />
+          </template>
+        </v-input>
       </div>
     </div>
   </div>
@@ -27,7 +31,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import VueCompositionAPI,{ defineComponent, PropType } from "@vue/composition-api";
+import VueCompositionAPI,{ defineComponent, PropType, computed } from "@vue/composition-api";
 Vue.use(VueCompositionAPI)
 
 type Record = {
@@ -51,19 +55,27 @@ export default defineComponent({
     }
   },
   setup(props,{emit}){
-    const handleInput = (input:Record) => {
-      if(props.value === null || props.value.length === 0) {
-        return emit("input", [input])
+    const getValue = (key:string) => {
+      const c = computed( () => Object.values((props.value || []).find(e=>Object.keys(e)[0]===key) || {})[0] || null );
+      return c.value;
+    }
+    const handleInput = (key:string,value:string) => {
+      const input = { [key]: value }
+      // Record first entry
+      if((props.value === null || props.value.length === 0) && value) {
+        return emit("input", [input]);
       }
-      const entryExists = props.value.find(p=>Object.keys(p)[0]===Object.keys(input)[0])
+      // Record entry change or remove if value is an empty string
+      const entryExists = props.value.find(p=>Object.keys(p)[0]===key);
       if(entryExists){
-        const values = props.value.filter(p=>Object.keys(p)[0]!==Object.keys(input)[0])
-        return emit("input", [...values,input])
+        const values = props.value.filter(p=>Object.keys(p)[0]!==key)
+        return value ? emit("input", [...values, input]) : emit("input", values);
       }
-      emit("input", [...props.value, input])
+      // Record new change or don't if value is an empty string
+      return value ? emit("input", [...props.value, input]) : emit("input", [...props.value]);
     }
 
-    return {handleInput}
+    return {handleInput,getValue}
   }
 })
 </script>

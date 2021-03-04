@@ -18,10 +18,16 @@ The value of this field will be:
 
 ![Editing field values](field-values.gif)
 
-## To do
-
-- [ ] A display extention showing completion progress
-- [ ] Dictionary validation when editing entries
+## Feature List
+- [x] Directus interface extension
+  - [x] Adding/removing/rearranging keys
+  - [x] Adding/removing values
+  - [x] Filters out empty values
+  - [x] Shows warning in empty fields
+  - [ ] Shows completion progress in editor
+- [ ] Directus display extension
+  - [ ] Displays completion progress in collection view
+  - [ ] Sorts items by completion
 
 ## Usage
 
