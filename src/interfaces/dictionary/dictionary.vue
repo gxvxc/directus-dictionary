@@ -3,16 +3,19 @@
     <v-notice v-if="!dictionary" type="warning">
       Dictionary configured incorrectly
     </v-notice>
+    <div class="info">
+      <v-progress-linear :value="ratio()*100" rounded />
+    </div>
     <div
       class="entry"
       v-for="entry in dictionary"
       :key="entry.key"
     >
-      <div class="info">
-        <h2>{{entry.key}}</h2>
+      <div class="key">
+        <h3>{{entry.key}}</h3>
         <p>{{entry.description}}</p>
       </div>
-      <div class="form">
+      <div class="value">
         <v-input
           :value="getValue(entry.key)"
           :nullable="false"
@@ -55,6 +58,14 @@ export default defineComponent({
     }
   },
   setup(props,{emit}){
+    const completed = () => {
+      const t = computed(()=>(props.value || []).length);
+      return t.value;
+    }
+    const ratio = ()=> {
+      const r = computed(()=>(completed() / props.dictionary.length));
+      return r.value;
+    }
     const getValue = (key:string) => {
       const c = computed( () => Object.values((props.value || []).find(e=>Object.keys(e)[0]===key) || {})[0] || null );
       return c.value;
@@ -75,12 +86,15 @@ export default defineComponent({
       return value ? emit("input", [...props.value, input]) : emit("input", [...props.value]);
     }
 
-    return {handleInput,getValue}
+    return {handleInput,getValue, ratio}
   }
 })
 </script>
 
 <style lang="scss" scoped>
+.info{
+  margin-bottom: 16px;
+}
 .entry {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -88,7 +102,7 @@ export default defineComponent({
   &:not(:last-child){
     margin-bottom: 32px;
   }
-  .info{
+  .key{
     h2{
       font-weight: 600;
       margin-bottom: 8px;
