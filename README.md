@@ -10,10 +10,10 @@ Extending the Directus built in repeater interface, you can add, rearange, and d
 
 The value of this field will be:
 ```json
-[
-  { "logIn": "Log In" },
-  { "logOut": "Log Out" }
-]
+{ 
+  "logIn": "Log In",
+  "logOut": "Log Out"
+}
 ```
 
 ![Editing field values](field-values.gif)
@@ -24,7 +24,7 @@ The value of this field will be:
   - [x] Adding/removing values
   - [x] Filters out empty values
   - [x] Shows warning in empty fields
-  - [ ] Shows completion progress in editor
+  - [X] Shows completion progress in editor
 - [ ] Directus display extension
   - [ ] Displays completion progress in collection view
   - [ ] Sorts items by completion

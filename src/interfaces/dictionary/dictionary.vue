@@ -37,10 +37,6 @@ import Vue from "vue"
 import VueCompositionAPI,{ defineComponent, PropType, computed } from "@vue/composition-api";
 Vue.use(VueCompositionAPI)
 
-type Record = {
-  key: string,
-  value: string | null
-}
 
 type IncomingRecord = {
   key: string,
@@ -50,7 +46,7 @@ type IncomingRecord = {
 export default defineComponent({
   props: {
     value: {
-      type: Array as PropType<Record[]>,
+      type: Object as PropType<Record<string, string>>,
       default: null
     },
     dictionary: {
@@ -59,7 +55,7 @@ export default defineComponent({
   },
   setup(props,{emit}){
     const completed = () => {
-      const t = computed(()=>(props.value || []).length);
+      const t = computed(()=>Object.keys(props.value || {}).length);
       return t.value;
     }
     const ratio = ()=> {
@@ -67,23 +63,38 @@ export default defineComponent({
       return r.value;
     }
     const getValue = (key:string) => {
-      const c = computed( () => Object.values((props.value || []).find(e=>Object.keys(e)[0]===key) || {})[0] || null );
+      const c = computed( () => {
+        if(!props.value || !props.value[key]){
+          return null
+        }
+        return props.value[key]
+      });
       return c.value;
     }
     const handleInput = (key:string,value:string) => {
       const input = { [key]: value }
+      const tValue = value.trim()
+
       // Record first entry
-      if((props.value === null || props.value.length === 0) && value) {
-        return emit("input", [input]);
+      if(props.value === null && tValue) {
+        return emit("input", input);
       }
+
+      const {[key]: _, ...values } = props.value;
+
       // Record entry change or remove if value is an empty string
-      const entryExists = props.value.find(p=>Object.keys(p)[0]===key);
-      if(entryExists){
-        const values = props.value.filter(p=>Object.keys(p)[0]!==key)
-        return value ? emit("input", [...values, input]) : emit("input", values);
+      if(props.value[key]){
+        if(tValue){
+          return emit("input", {...values, ...input});
+        }
+        if(Object.keys(values).length===0){
+          return emit("input", null);
+        }
+        return emit("input", values);
       }
+
       // Record new change or don't if value is an empty string
-      return value ? emit("input", [...props.value, input]) : emit("input", [...props.value]);
+      return tValue ? emit("input", {...props.value, ...input}) : emit("input", values);
     }
 
     return {handleInput,getValue, ratio}
