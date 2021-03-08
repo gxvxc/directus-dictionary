@@ -1,22 +1,25 @@
 # Directus Dictionary
 
-An extension providing dictionary interface for [Directus](https://github.com/directus/directus) that returns a standartd array of key/value pairs.
+An extension providing dictionary interface for [Directus](https://github.com/directus/directus) that returns a standartd object of key/value pairs.
 
 ## Example setup
 
-Extending the Directus built in repeater interface, you can add, rearange, and delete entries.
+Extend the Directus built in repeater interface, to add, rearange, and delete keys.
 
 ![Field options](field-options.gif)
 
-The value of this field will be:
+Add values to the predifined list of keys:
+
+![Editing field values](field-values.gif)
+
+The end value of this field will be:
 ```json
 { 
   "logIn": "Log In",
   "logOut": "Log Out"
 }
 ```
-
-![Editing field values](field-values.gif)
+Keys with empty are omitted from the response object.
 
 ## Feature List
 - [x] Directus interface extension
