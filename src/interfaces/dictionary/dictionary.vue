@@ -13,7 +13,11 @@
     >
       <div class="key">
         <h3>{{entry.key}}</h3>
-        <p>{{entry.description}}</p>
+        <div v-if="entry.description">
+          <p v-for="(chunk, index) in splitInChunks(entry.description)" :key="index">
+            {{chunk}}
+          </p>
+        </div>
       </div>
       <div class="value">
         <v-input
@@ -96,8 +100,8 @@ export default defineComponent({
       // Record new change or don't if value is an empty string
       return tValue ? emit("input", {...props.value, ...input}) : emit("input", values);
     }
-
-    return {handleInput,getValue, ratio}
+    const splitInChunks = (t:string) => t.split("\n")
+    return {handleInput,getValue, ratio, splitInChunks}
   }
 })
 </script>
