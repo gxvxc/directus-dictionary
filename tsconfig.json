@@ -1,34 +1,28 @@
 {
 	"compilerOptions": {
-		"skipLibCheck": true,
-		"target": "esnext",
-		"module": "esnext",
-		"strict": false,
-		"jsx": "preserve",
-		"importHelpers": true,
+		"target": "ES2019",
+		"lib": ["ES2019", "DOM"],
 		"moduleResolution": "node",
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
 		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedParameters": true,
+		"alwaysStrict": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"resolveJsonModule": false,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
-		"sourceMap": true,
-		"baseUrl": ".",
-		"rootDir": "src",
-		"paths": {
-			"@/*": [ "src/*" ]
-		},
-		"lib": [
-			"esnext",
-			"dom",
-			"dom.iterable",
-			"scripthost"
-		]
+		"isolatedModules": true,
+		"rootDir": "./src"
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.vue"
-	],
-  "files": [
-    "src/types.d.ts"
-  ],
-	"exclude": ["node_modules"]
+	"include": ["./src/**/*.ts"]
 }

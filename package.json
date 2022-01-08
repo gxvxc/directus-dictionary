@@ -1,35 +1,33 @@
 {
-  "version": "0.1.0",
-  "name": "directus-dictionary",
-  "author": "George Chelebiev <george@forkforkfork.com>",
-  "license": "MIT",
-  "keywords": [
-    "directus",
-    "directus-extensions",
-    "directus-extensions-interfaces"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/georgexchelebiev/directus-dictionary"
-  },
-  "homepage": "https://github.com/georgexchelebiev/directus-dictionary#readme",
-  "scripts": {
-    "build": "rollup -c"
-  },
-  "devDependencies": {
-    "prettier": "^1.19.1",
-    "rollup": "^2.39.1",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-scss": "^2.6.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "rollup-plugin-vue": "^5.0.0",
-    "typescript": "^4.2.2"
-  },
-  "dependencies": {
-    "@vue/composition-api": "^1.0.0-rc.2",
-    "vue": "^2.6.12"
-  }
+	"version": "0.2.0",
+	"name": "directus-dictionary",
+	"author": "George Chelebiev <george@forkforkfork.com>",
+	"directus:extension": {
+		"type": "interface",
+		"path-bak": "dist/directus-dictionary/index.js",
+		"path": "../public/directus/extensions/interfaces/directus-dictionary/index.js",
+		"source": "src/index.ts",
+		"host": "^9.4.2"
+	},
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-interface",
+		"directus-extensions-interfaces"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/georgexchelebiev/directus-dictionary"
+	},
+	"homepage": "https://github.com/georgexchelebiev/directus-dictionary#readme",
+	"scripts": {
+		"build": "directus-extension build",
+		"watch": "directus-extension build --watch"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "9.4.2",
+		"sass": "^1.46.0",
+		"typescript": "^4.5.4",
+		"vue": "^3.2.26"
+	}
 }
