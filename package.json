@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "directus-dictionary",
+  "name": "directus-extension-dictionary",
   "author": "George Chelebiev <george@forkforkfork.com>",
   "license": "MIT",
   "keywords": [
@@ -12,6 +12,16 @@
     "type": "git",
     "url": "https://github.com/georgexchelebiev/directus-dictionary"
   },
+  "directus:extension": {
+    "type": "interface",
+    "path": "dist/interfaces/dictionary/index.js",
+    "source": "src/interfaces/dictonary/index.ts",
+    "host": "^v9.9.0",
+    "hidden": false
+  },
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/georgexchelebiev/directus-dictionary#readme",
   "scripts": {
     "build": "rollup -c"
